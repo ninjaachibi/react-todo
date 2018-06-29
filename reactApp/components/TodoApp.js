@@ -18,6 +18,10 @@ let dummyData = [
   {
     taskText: 'haircut',
     completed: true
+  },
+  {
+    taskText: 'eat',
+    completed: true
   }
 ];
 
@@ -29,6 +33,12 @@ class TodoApp extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.setState({
+      todos: dummyData
+    });
+  }
+
   addTodo(value) {
     dummyData.push({
       taskText: value,
@@ -36,13 +46,14 @@ class TodoApp extends React.Component {
     });
     this.setState({
       todos: dummyData,
-    })
+    });
   }
 
-  componentDidMount() {
+  removeTodo(index) {
+    dummyData.splice(index,1);
     this.setState({
       todos: dummyData
-    })
+    });
   }
 
   render() {
@@ -50,7 +61,7 @@ class TodoApp extends React.Component {
       <div>
         <h1>My Todo List</h1>
         <InputLine submit={(value) => this.addTodo(value)}/>
-        <TodoList todos={this.state.todos}/>
+        <TodoList todos={this.state.todos} todoXClick={(index)=>this.removeTodo(index)}/>
       </div>
     )
   }
