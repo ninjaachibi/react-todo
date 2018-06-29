@@ -3,6 +3,20 @@ import ReactDOM from 'react-dom';
 
 let dummyData = ['robert', 'jerry', 'smash', 'haircut', 'laundry'];
 
+class TodoApp extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <div>
+        <InputLine />
+        <TodoList />
+      </div>
+    )
+  }
+}
+
 class TodoList extends React.Component {
   constructor(props) {
     super(props);
@@ -30,5 +44,18 @@ class Todo extends React.Component {
   }
 }
 
-ReactDOM.render(<TodoList />,
+class InputLine extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <div>
+        <input type="text" placeholder="task"/> <button>Add Todo</button>
+      </div>
+    )
+  }
+}
+
+ReactDOM.render(<TodoApp />,
    document.getElementById('root'));
