@@ -69,6 +69,7 @@ class TodoApp extends React.Component {
     return (
       <div>
         <h1>My Todo List</h1>
+        hi
         <InputLine submit={(value) => this.addTodo(value)}/>
         <TodoList todos={this.state.todos} todoXClick={(index)=>this.removeTodo(index)} toggleTodo={(index)=>this.toggleTodo(index)}/>
       </div>
