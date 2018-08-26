@@ -16,5 +16,12 @@ router.post('/add', (req,res) => {
     })
 });
 
+router.get('/all', (req,res) => {
+  const todos = TodoItem.find()
+  .then(data => {
+    console.log('all todos', data);
+    res.send(data)
+  })
+});
 
 module.exports = router;
