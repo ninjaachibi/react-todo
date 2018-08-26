@@ -34,6 +34,9 @@ class TodoApp extends React.Component {
     this.state = {
       todos: [],
     }
+    this.addTodo = this.addTodo.bind(this);
+    this.removeTodo = this.removeTodo.bind(this);
+    this.toggleTodo = this.toggleTodo.bind(this);
   }
 
   componentDidMount() {
@@ -73,20 +76,28 @@ class TodoApp extends React.Component {
   }
 
   toggleTodo(id) {
-    console.log(id);
+    console.log('id to toggel',id);
     console.log('clicked to toggle');
+
     axios.post(dbUrl + '/toggle', {id})
       .then(response => {
         console.log('toggle response', response);
-        let copy = this.state.todos.slice();
-        copy[id].completed = !copy[id].completed;
-        this.setState({
-          todos: copy
-        });
       })
       .catch((err) => {
         console.log('error', err);
       })
+
+    let copy = this.state.todos.slice();
+    console.log('copy', copy);
+    copy.forEach((item) => {
+      if(item._id === id) {
+        item.completed = !item.completed;
+      }
+    })
+    console.log('copy after', copy);
+    this.setState({
+      todos: copy
+    });
   }
 
   render() {
@@ -95,8 +106,8 @@ class TodoApp extends React.Component {
       <div>
         <h1>My Todo List</h1>
         hi
-        <InputLine submit={(value) => this.addTodo(value)}/>
-        <TodoList todos={this.state.todos} todoXClick={(index)=>this.removeTodo(index)} toggleTodo={(index)=>this.toggleTodo(index)}/>
+        <InputLine submit={this.addTodo}/>
+        <TodoList todos={this.state.todos} todoXClick={this.removeTodo} toggleTodo={this.toggleTodo}/>
       </div>
     )
   }
