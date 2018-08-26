@@ -42,4 +42,19 @@ router.post('/toggle', (req, res) => {
     });
 });
 
+router.post('/delete', (req,res) => {
+  const id = req.body.id;
+  console.log('in delete',id);
+
+
+  TodoItem.findByIdAndDelete(id)
+    .then(resp => {
+      console.log('deleted', resp);
+      res.send(resp)
+    })
+    .catch(err => {
+      res.send(err)
+    });
+})
+
 module.exports = router;

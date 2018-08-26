@@ -76,7 +76,6 @@ class TodoApp extends React.Component {
   }
 
   toggleTodo(id) {
-    console.log('id to toggel',id);
     console.log('clicked to toggle');
 
     axios.post(dbUrl + '/toggle', {id})
@@ -88,13 +87,13 @@ class TodoApp extends React.Component {
       })
 
     let copy = this.state.todos.slice();
-    console.log('copy', copy);
+    // console.log('copy', copy);
     copy.forEach((item) => {
       if(item._id === id) {
         item.completed = !item.completed;
       }
     })
-    console.log('copy after', copy);
+    // console.log('copy after', copy);
     this.setState({
       todos: copy
     });
